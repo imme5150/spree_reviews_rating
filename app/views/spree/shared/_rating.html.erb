@@ -1,4 +1,4 @@
-if @product.reviews_count > 0 %>
+<% if @product.reviews_count > 0 %>
 <div class="rating">
 	<p><%= t('average_customer_rating') %>: </p>
 	<div id="star" data-rating="<%= @product.stars || 0 %>"></div>

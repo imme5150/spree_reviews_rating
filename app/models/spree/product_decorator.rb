@@ -1,8 +1,8 @@
 Spree::Product.class_eval do
   has_many :reviews
 
-  def get_stars
-    {:star => avg_rating.round, :rcount => reviews_count}
+  def stars # rounded to the nearest half
+    @stars ||= (2.0 * self.avg_rating).round / 2
   end
 
   def recalculate_rating

@@ -1,12 +1,11 @@
-<% stars = @product.get_stars
-if !stars.blank? %>
+if @product.reviews_count > 0 %>
 <div class="rating">
 	<p><%= t('average_customer_rating') %>: </p>
-	<div id="star" data-rating="<%= stars[:star] || 0 %>"></div>
-	<p>(<%= t('based_upon') %> <%= stars[:rcount] %> <%= t('reviews') %>)</p>
+	<div id="star" data-rating="<%= @product.stars || 0 %>"></div>
+	<p>(<%= t('based_upon') %> <%= @product.reviews_count %> <%= t('reviews') %>)</p>
 	<div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-		<meta itemprop="ratingValue" content="<%= stars[:star] %>" />
-		<meta itemprop="reviewCount" content="<%= stars[:rcount] %>" />
+		<meta itemprop="ratingValue" content="<%= @product.stars %>" />
+		<meta itemprop="reviewCount" content="<%= @product.reviews_count %>" />
 	</div>
 </div>
 <% end %>
@@ -15,7 +14,7 @@ if !stars.blank? %>
 jQuery(document).ready(function() {
 	$("#star").raty({
 		readOnly: true,
-		start: <%= stars[:star] %>,
+		start: <%= @product.stars %>,
 		half:  true,
 		width: 180,
 		starHalf: 'star-half<%= "-big" if (Spree::Config[:star_big] == true) %>.png',

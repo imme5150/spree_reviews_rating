@@ -28,7 +28,7 @@ module Spree
       @review = Spree::Review.new(params[:review])
       @review.product = @product
       @review.user = current_user if user_signed_in?
-      @review.location = request.remote_ip
+      @review.ip_address = request.remote_ip
 
       authorize! :create, @review
 

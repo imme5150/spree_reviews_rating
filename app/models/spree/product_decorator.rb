@@ -10,11 +10,9 @@ Spree::Product.class_eval do
     if reviews_count > 0
       avg_rating =  self.reviews.approved.sum(:rating).to_f / reviews_count
     else
-      # if there are no approved reviews w/ ratings, use all approved reviews
-      reviews_count = reviews.approved.count
       avg_rating = 0
     end
-    self.update_attributes({avg_rating:avg_rating, reviews_count:reviews_count}, :without_protection => true)
+    self.update_attributes({avg_rating:avg_rating, reviews_count:reviews.approved.count}, :without_protection => true)
   end
   
 end
